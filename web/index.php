@@ -1,7 +1,5 @@
 <?php
 
-if($_SERVER['SERVER_NAME'] ==! 'fbidfinder.com'){ header ('Location: http://fbidfinder.com'); } //redirection for labs.batu.me visitors
-
 require_once '../includes/silex.phar';
 include_once '../includes/functions.php';
 
