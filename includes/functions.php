@@ -20,7 +20,6 @@ function curl_get_contents($url) {
 	return $output;
 }
 
-
 function get_fb_info($username){
     
     // should I check somethings here?
@@ -28,10 +27,58 @@ function get_fb_info($username){
     $data = curl_get_contents('http://graph.facebook.com/'.$username);    
     $data = json_decode($data, TRUE);
     
-    if( ! isset($data['error']) )
+    if( ! isset($data['error']) ){
+        
+        $general_information = array(
+
+            'id' => $data['id'],
+            'link' => $data['link'],
+            'username' => $data['username'],
+            'name' => $data['name']
+
+        );
+
+        if ( isset($data['likes'] )) {
+
+            $other_information = array(
+
+                'type' => 'page',
+                'likes' => $data['likes'],
+                'category' => $data['category'],
+                'website' => $data['website'],
+                'founded' => $data['founded'],
+                'likes' => $data['likes'],
+            );
+
+        } else {
+
+            $humanreadable = get_humanreadable($data['gender'], $data['locale']);
+            
+            $other_information = array(
+
+                'type' => 'user',
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'gender' => $humanreadable['gender'],
+                'locale' => $humanreadable['locale']
+                
+            );
+        }
+
+        $data = array(
+            
+            'general_information' => $general_information,
+            'other_information' => $other_information
+            
+        );
+        
         return $data;
-    else
+        
+    } else {
+        
         return FALSE;
+        
+    }
     
 }
 

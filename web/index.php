@@ -53,12 +53,8 @@ $app->get('/{username}', function($username) use($app) {
     if(! get_fb_info($username) ){ return $app->redirect('/?error=notfound'); }
     
     $fb_info = get_fb_info($username);
-    $data = array(
-        'information' => $fb_info,
-        'more' => get_humanreadable($fb_info['gender'], $fb_info['locale'])
-    );
     
-    return $app['twig']->render('information.twig', $data);
+    return $app['twig']->render('information.twig', $fb_info);
     
 }); 
 

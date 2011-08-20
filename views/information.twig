@@ -4,21 +4,21 @@
 <section id="information">
 
 <div class="page-header">
-  <h1>Find your Facebook ID <small>Hi, {{ information.first_name }} </small></h1>
+  <h1>Find your Facebook ID <small>Hi, {{ general_information.name }} </small></h1>
 </div>
 
 <div class="row">
   <div class="span4 columns" align="center">
-    <img src="https://graph.facebook.com/{{ information.username }}/picture?type=large" />
+    <img src="https://graph.facebook.com/{{ general_information.username }}/picture?type=large" />
   </div>
   <div class="span12 columns">
-    <h3>Your Facebook ID is #<a href="http://www.facebook.com/profile.php?id={{ information.id }}">{{ information.id }}</a></h3>
+    <h3>Your Facebook ID is #<a href="http://www.facebook.com/profile.php?id={{ general_information.id }}">{{ general_information.id }}</a></h3>
     <p>We also found the information below:</p>
     <address>
       <strong>{{ information.name }}</strong> ({{ information.username }})<br />
       {{ more.gender }}<br />
       {{ more.locale }}<br />
-      <abbr title="link">Link:</abbr> {{ information.link }}
+      <abbr title="link">Link:</abbr> {{ general_information.link }}
     </address>
     <p><strong>Note:</strong> Your <strong>publicy available</strong> information has been recorded to our database for statistics.</p>
   </div>
