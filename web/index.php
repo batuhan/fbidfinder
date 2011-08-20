@@ -1,5 +1,7 @@
 <?php
 
+if($_SERVER['SERVER_NAME'] ==! 'fbidfinder.com'){ header ('Location: http://fbidfinder.com'); } //redirection for labs.batu.me visitors
+
 require_once '../includes/silex.phar';
 include_once '../includes/functions.php';
 
@@ -16,7 +18,6 @@ $app->register(new Silex\Extension\TwigExtension(), array(
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 
 $app->get('/', function (Request $request) use ($app) {
     
