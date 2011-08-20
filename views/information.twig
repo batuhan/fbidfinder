@@ -1,10 +1,10 @@
 {% extends "base.twig" %}
-
 {% block content %}
 <section id="information">
 
 <div class="page-header">
-  <h1>Find your Facebook ID <small>Hi, {{ general_information.name }} </small></h1>
+  <h1>Find your Facebook ID <small>Hi, {{ general_information.name }}
+                                   {% if other_information.type == "page" %} fan!{% endif %}</small></h1>
 </div>
 
 <div class="row">
@@ -12,15 +12,22 @@
     <img src="https://graph.facebook.com/{{ general_information.username }}/picture?type=large" />
   </div>
   <div class="span12 columns">
-    <h3>Your Facebook ID is #<a href="http://www.facebook.com/profile.php?id={{ general_information.id }}">{{ general_information.id }}</a></h3>
+    <h3>{% if other_information.type == "user" %}Your{% else %}Page's{% endif %} Facebook ID is #<a href="http://www.facebook.com/{{ general_information.username }}">{{ general_information.id }}</a></h3>
     <p>We also found the information below:</p>
     <address>
-      <strong>{{ information.name }}</strong> ({{ information.username }})<br />
-      {{ more.gender }}<br />
-      {{ more.locale }}<br />
-      <abbr title="link">Link:</abbr> {{ general_information.link }}
+      <strong>{{ general_information.name }}</strong> ({{ general_information.username }})<br />
+
+      {% if other_information.type == "user" %}
+          {{ other_information.gender }}<br />
+          {{ other_information.locale }}<br />
+      {% elseif other_information.type == "page" %}
+          {{ other_information.likes }} likes on page<br />
+          {{ other_information.category }} page<br />
+          {% if other_information.website %} <abbr title="link">Website:</abbr> {{ other_information.website }} {% endif %}
+          <p><fb:like href="http://www.facebook.com/{{ general_information.username }}" send="false" width="450" show_faces="false" action="like" font=""></fb:like></p>
+      {% endif %}
     </address>
-    <p><strong>Note:</strong> Your <strong>publicy available</strong> information has been recorded to our database for statistics.</p>
+    <p><strong>Note:</strong> <strong>Publicy available</strong> information here has been recorded to our database for statistics.</p>
   </div>
 </div>
 
