@@ -13,6 +13,20 @@ $app->register(new Silex\Extension\TwigExtension(), array(
     'twig.class_path' => '../includes/Twig',
 ));
 
+$app->get('/', function (Request $request) use ($app) {
+    
+    if($request->get('error')){
+        $data = array(
+            'error' => $request->get('error')      
+        );
+    }else{
+        $data = NULL;
+    }
+    
+    return $app['twig']->render('homepage.twig', $data);
+    
+});
+
 $app->post('/get_id', function(Request $request) use($app) { 
     
     $id = $request->get('fbid');
