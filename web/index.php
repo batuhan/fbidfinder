@@ -3,15 +3,20 @@
 require_once '../includes/silex.phar';
 include_once '../includes/functions.php';
 
+require_once '../includes/lib/Twig/Autoloader.php';
+
 $app = new Silex\Application();
+$app['debug'] = true;
+
+Twig_Autoloader::register();
+
+$app->register(new Silex\Extension\TwigExtension(), array(
+    'twig.path'       => '../views',
+));
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-$app->register(new Silex\Extension\TwigExtension(), array(
-    'twig.path'       => '../views',
-    'twig.class_path' => '../includes/Twig',
-));
 
 $app->get('/', function (Request $request) use ($app) {
     
@@ -20,7 +25,9 @@ $app->get('/', function (Request $request) use ($app) {
             'error' => $request->get('error')      
         );
     }else{
-        $data = NULL;
+        $data = array(
+            'error' => NULL     
+        );
     }
     
     return $app['twig']->render('homepage.twig', $data);
@@ -28,6 +35,10 @@ $app->get('/', function (Request $request) use ($app) {
 });
 
 $app->post('/get_id', function(Request $request) use($app) { 
+    
+    $fbid = $request->get('fbid');
+    
+    if( ! isset($fbid) ){ return $app->redirect('/?error=empty'); }
     
     $id = $request->get('fbid');
     return $app->redirect('/'.$id);
@@ -39,12 +50,15 @@ $app->get('/{username}', function($username) use($app) {
     
     $username = $app->escape($username);
     
-    echo 'Your username is '.$app->escape($username); 
-    if(get_fb_info($username)){
-    print_r (get_fb_info($username));
-    }else{
-        echo 'you don\'t exist';
-    }
+    if(! get_fb_info($username) ){ return $app->redirect('/?error=notfound'); }
+    
+    $fb_info = get_fb_info($username);
+    $data = array(
+        'information' => $fb_info,
+        'more' => get_humanreadable($fb_info['gender'], $fb_info['locale'])
+    );
+    
+    return $app['twig']->render('information.twig', $data);
     
 }); 
 
