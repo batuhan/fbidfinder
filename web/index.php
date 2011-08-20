@@ -3,7 +3,7 @@
 require_once '../includes/silex.phar';
 include_once '../includes/functions.php';
 
-require_once '../includes/lib/Twig/Autoloader.php';
+require_once '../includes/lib/twig/Autoloader.php';
 
 $app = new Silex\Application();
 $app['debug'] = true;
