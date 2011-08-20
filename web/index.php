@@ -8,6 +8,11 @@ $app = new Silex\Application();
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+$app->register(new Silex\Extension\TwigExtension(), array(
+    'twig.path'       => '../views',
+    'twig.class_path' => '../includes/Twig',
+));
+
 $app->post('/get_id', function(Request $request) use($app) { 
     
     $id = $request->get('fbid');
