@@ -33,24 +33,21 @@ $app->get('/', function (Request $request) use ($app) {
     
 });
 
-$app->post('/get_id', function(Request $request) use($app) { 
+$app->post('/do', function(Request $request) use($app) { 
     
     $username = $request->get('username');
     
     if( ! isset($username) ){ return $app->redirect('/?error=empty'); }
     
-    return $app->redirect('/'.$username);
-    
-}); 
-
-$app->post('/who_first ', function(Request $request) use($app) { 
-    
-    $first = $request->get('first_person');
-    $second = $request->get('second_person');
-    
-    if( ! isset($first) OR ! isset($second) ){ return $app->redirect('/?error=empty'); }
-    
-    return $app->redirect('/compare/'.$first.'/with/'.$second.'/');
+    if( ! isset($second_username) ){
+        
+        return $app->redirect('/'.$username);
+        
+    }else{
+        
+        return $app->redirect('/'.$first.'/and/'.$second.'/');
+        
+    }
     
 }); 
 
