@@ -51,22 +51,6 @@ $app->post('/do', function(Request $request) use($app) {
     
 }); 
 
-
-$app->get('/{username}/and/{second_username}/', function($first_username, $second_username) use($app) { 
-    
-    $first_username = $app->escape($first_username);
-    $second_username = $app->escape($second_username);
-    
-    $first_username_info = get_fb_info($first_username);
-
-    $second_username_info = get_fb_info($second_username);
-
-    if( ! $first_username_info OR  ! $second_username_info ){ return $app->redirect('/?error=notfound'); }
-        
-    return $app['twig']->render('compare.twig', $fb_info);
-    
-}); 
-
 $app->get('/{username}', function($username) use($app) { 
     
     $username = $app->escape($username);
@@ -76,6 +60,28 @@ $app->get('/{username}', function($username) use($app) {
     if( ! $fb_info ){ return $app->redirect('/?error=notfound'); }
         
     return $app['twig']->render('information.twig', $fb_info);
+    
+}); 
+
+$app->get('/{username}/and/{second_username}/', function($username, $second_username) use($app) { 
+    
+    $username = $app->escape($username);
+    $second_username = $app->escape($second_username);
+    
+    $username_info = get_fb_info($username);
+
+    $second_username_info = get_fb_info($second_username);
+
+    if( ! $username_info OR  ! $second_username_info ){
+        return $app->redirect('/?error=yunoexist');
+    }
+
+    if($username_info['other_information']['type'] === 'page' OR $second_username_info['other_information']['type'] === 'page'){
+        return $app->redirect('/?error=yunohuman');
+    }
+    
+    
+    return $app['twig']->render('compare.twig', $fb_info);
     
 }); 
 
