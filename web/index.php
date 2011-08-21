@@ -35,24 +35,49 @@ $app->get('/', function (Request $request) use ($app) {
 
 $app->post('/get_id', function(Request $request) use($app) { 
     
-    $fbid = $request->get('fbid');
+    $username = $request->get('username');
     
-    if( ! isset($fbid) ){ return $app->redirect('/?error=empty'); }
+    if( ! isset($username) ){ return $app->redirect('/?error=empty'); }
     
-    $id = $request->get('fbid');
-    return $app->redirect('/'.$id);
+    return $app->redirect('/'.$username);
     
 }); 
 
+$app->post('/who_first ', function(Request $request) use($app) { 
+    
+    $first = $request->get('first_person');
+    $second = $request->get('second_person');
+    
+    if( ! isset($first) OR ! isset($second) ){ return $app->redirect('/?error=empty'); }
+    
+    return $app->redirect('/compare/'.$first.'/with/'.$second.'/');
+    
+}); 
+
+
+$app->get('/{username}/and/{second_username}/', function($first_username, $second_username) use($app) { 
+    
+    $first_username = $app->escape($first_username);
+    $second_username = $app->escape($second_username);
+    
+    $first_username_info = get_fb_info($first_username);
+
+    $second_username_info = get_fb_info($second_username);
+
+    if( ! $first_username_info OR  ! $second_username_info ){ return $app->redirect('/?error=notfound'); }
+        
+    return $app['twig']->render('compare.twig', $fb_info);
+    
+}); 
 
 $app->get('/{username}', function($username) use($app) { 
     
     $username = $app->escape($username);
     
-    if(! get_fb_info($username) ){ return $app->redirect('/?error=notfound'); }
-    
     $fb_info = get_fb_info($username);
-    
+
+    if( ! $fb_info ){ return $app->redirect('/?error=notfound'); }
+        
     return $app['twig']->render('information.twig', $fb_info);
     
 }); 
