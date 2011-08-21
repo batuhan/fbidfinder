@@ -1,5 +1,4 @@
-FBIDFinder(.com)
------------------------------------
+####FBIDFinder(.com)
 
 **FBIDFinder** is a part of [Batuhan's Labs](http://labs.batu.me/ "Labs Homepage") and is a tool which simply finds a persons or pages ID on Facebook.
 
@@ -9,7 +8,8 @@ I'll (@batuhanicoz) be developing this tool and will extend it's features. Until
 
 ## Notes:
 - This tool uses Twitter's Bootstrap and SensioLabs' Silex PHP Framework (with Twig Extension)
-	- This tool is supported by owner of Gplus.to, Şirzat Aytaç.
+- This tool is supported by owner of Gplus.to, Şirzat Aytaç.
+- Thanks Rıza Selçuk Saydam for idea of a standalone web page for this tool.
 
 My website: [Batuhan's Homepage](http://batu.me/1 "Batuhan's Homepage") 
 
