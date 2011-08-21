@@ -19,7 +19,7 @@
 
       {% if other_information.type == "user" %}
           {{ other_information.gender }}<br />
-          {{ other_information.locale }}<br />
+          Using Facebook in {{ other_information.locale }}<br />
       {% elseif other_information.type == "page" %}
           {{ other_information.likes }} likes on page<br />
           {{ other_information.category }} page<br />
