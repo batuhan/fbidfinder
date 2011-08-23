@@ -1,33 +1,33 @@
 {% extends "base.twig" %}
-
 {% block content %}
-
-<section id="form">
+<section id="information">
 
 <div class="page-header">
-  <h1>Find your Facebook ID</h1>
+  <h1>Find your Facebook ID <small>Hi, {{ general_information.name }}
+                                   {% if other_information.type == "page" %} fan!{% endif %}</small></h1>
 </div>
+
 <div class="row">
-  <div class="span4 columns">
-    <h2>Notes</h2>
-    <p>This tools makes only one thing, finds your (or basically any profile/page with a username) Facebook ID. <br /> Why you would ever wanna know your ID? No idea.</p>
+  <div class="span4 columns" align="center">
+    <img src="https://graph.facebook.com/{{ general_information.username }}/picture?type=large" />
   </div>
   <div class="span12 columns">
-      <form action="do" method="post" class="form-stacked">
-      <fieldset>
-        <legend>Username</legend>
-        <div class="clearfix">
-          <label for="">Just enter the username and nothing else, please.</label>
-          <div class="input">
-            http://www.facebook.com/<input class="xlarge" id="username" name="username" size="30" type="text" />
-          </div>
-        </div> <!-- /clearfix -->
-      </fieldset>
-      <div class="actions">
-        <button type="submit" class="btn primary">Find my ID</button>
-        <button type="reset" class="btn">Reset</button>
-      </div>
-    </form>
+    <h3>{% if other_information.type == "user" %}Your{% else %}Page's{% endif %} Facebook ID is #<a href="http://www.facebook.com/{{ general_information.username }}">{{ general_information.id }}</a></h3>
+    <p>We also found the information below:</p>
+    <address>
+      <strong>{{ general_information.name }}</strong> ({{ general_information.username }})<br />
+
+      {% if other_information.type == "user" %}
+          {{ other_information.gender }}<br />
+          Using Facebook in {{ other_information.locale }}<br />
+      {% elseif other_information.type == "page" %}
+          {{ other_information.likes }} likes on page<br />
+          {{ other_information.category }} page<br />
+          {% if other_information.website %} <abbr title="link">Website:</abbr> {{ other_information.website }} {% endif %}
+          <p><fb:like href="http://www.facebook.com/{{ general_information.username }}" send="false" width="450" show_faces="false" action="like" font=""></fb:like></p>
+      {% endif %}
+    </address>
+    <p><strong>Note:</strong> <strong>Publicy available</strong> information here has been recorded to our database for statistics.</p>
   </div>
 </div>
 
