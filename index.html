@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Facebook ID Finder, Batuhan's Social Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Facebook ID Finder is a very simple open-source tool to easily learn your Facebook ID.">
+    <meta name="author" content="Batuhan Icoz">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; 
+      }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <h1>Facebook ID Finder</h1>
+      <p>A <strong>very</strong> simple tool to easily learn your Facebook ID.</p>
+        <div class="clearfix">
+          <label for="">Just enter the username and nothing else, please.</label>
+          <div class="input">
+            https://www.facebook.com/ <input class="xlarge" id="username" name="username" size="30" type="text" />
+          </div>
+        </div> <!-- /clearfix -->
+	<div id="results" style="display:none;">
+	<h3><span id="name"></span>'s Facebook ID is #<a href="" id="link"><span id="fbid"></span></a></h3>
+	</div>
+	<hr />
+    <footer class="footer">
+	  <p>Built by <a href="http://batu.me/1">Batuhan Icoz</a> (<a href="http://batu.me/about/me">about, <a href="http://batu.me/projects">other projects</a>, <a href="http://batu.me/contact">contact</a>) with the support of <a href="https://plus.google.com/u/0/107623790744375289729/posts">Şirzat Aytaç</a> and <a href="http://rss-ems.com/">Rıza Selçuk Saydam</a>.</p>
+	   <p>
+		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=batuhanicoz&repo=fbidfinder-com&type=watch"
+	  allowtransparency="true" frameborder="0" scrolling="0" width="62px" height="20px"></iframe>
+		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=batuhanicoz&repo=fbidfinder-com&type=fork"
+	  allowtransparency="true" frameborder="0" scrolling="0" width="53px" height="20px"></iframe>
+		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=batuhanicoz&type=follow"
+		  allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="20px"></iframe>
+	   </p>
+    </footer>
+
+    </div> <!-- /container -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script>
+		function findID(username){
+			$.getJSON('https://graph.facebook.com/' + username, function(data) {
+				
+				window.history.pushState(data, data.name + "'s ID", data.username);
+				$("#results").show();
+				$("#fbid").html(data.id);
+				$("#name").html(data.name);
+				$("#link").attr("href", data.link);		
+				$("#username").val(data.username);
+			})
+		}
+		
+		$(function(){
+
+			if(!(window.location.pathname=="/")){
+				findID(window.location.pathname);				
+			}
+			
+			$("#username").focus();
+
+			$('#username').keyup(function(){
+				findID($('#username').val(), 'keyup');
+			});
+
+		});
+	</script>
+	
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-11142497-14']);
+	  _gaq.push(['_setDomainName', 'fbidfinder.com']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+  </body>
+</html>
