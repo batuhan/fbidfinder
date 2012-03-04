@@ -64,7 +64,6 @@
     </div> <!-- /container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 	<script>
 		function findID(username){
 			$.getJSON('https://graph.facebook.com/' + username, function(data) {
@@ -74,7 +73,7 @@
 				$("#fbid").html(data.id);
 				$("#name").html(data.name);
 				$("#link").attr("href", data.link);		
-				//$("#username").val(data.username);
+
 			})
 		}
 		
