@@ -1,4 +1,4 @@
-####FBIDFinder(.com)
+####FBIDFinder
 
 **FBIDFinder** is a very simple one page tool to  find a persons or pages ID on Facebook.
 
@@ -9,4 +9,4 @@
 
 My website: [Batuhan's Homepage](http://batu.me/1 "Batuhan's Homepage") 
 
-Tool website: [fbidfinder.com](http://fbidfinder.com/ "The website")
+Tool website: [fbidfinder.com](http://fbidfinder.com/ "The website") *update:* I've lost the domain. Use [static.batu.me/fbidfinder](http://static.batu.me/fbidfinder/ "this").
