@@ -49,8 +49,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>
+		var req;
 		function findID(username){
-			$.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
+			if(req){
+				req.abort();
+			}
+			req = $.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
 				$("#results").show();
 				$("#fbid").html(data.id);
 				$("#name").html(data.name);
@@ -58,7 +62,7 @@
 				var link_to_picture = "https://graph.facebook.com/" + username + "/picture";
 				$("#link").attr("href", link);
 				$("#profilepic").attr("src", link_to_picture);
-			})
+			});
 		}
 		
 		$(function(){
@@ -68,7 +72,7 @@
 			$('#username').on('keyup keydown blur', function(){
 				setTimeout(function(){
 					findID($('#username').val());
-				}, 10);
+				}, 5);
 			});
 
 		});
