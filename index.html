@@ -64,7 +64,7 @@
 
 			$("#username").focus();
 
-			$('#username').keydown(function(){
+			$('#username').on('keyup keydown blur', function(){
 				findID($('#username').val());
 			});
 
