@@ -39,19 +39,8 @@
 	</div>
 	<hr />
     <footer class="footer">
-	  <p>Built by <a href="http://batu.me/1">Batuhan Icoz</a> (<a href="http://batu.me/about/me">about, <a href="http://batu.me/projects">other projects</a>, <a href="http://batu.me/contact">contact</a>) with the support of <a href="https://plus.google.com/u/0/107623790744375289729/posts">Şirzat Aytaç</a> and <a href="http://rss-ems.com/">Rıza Selçuk Saydam</a>.</p>
+	  <p>Built by <a href="http://bt.hn/?ref=fbidfinder">Batuhan Icoz</a>.</p>
 	   
-	   <p>
-	   	<div class="addthis_toolbox addthis_default_style"
-	   	addthis:url="http://fbidfinder.com"
-        addthis:title="Facebook ID Finder"
-        addthis:description="A very simple tool to easily learn your Facebook ID.">
-			<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-			<a class="addthis_button_tweet"></a>
-			<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-			<a class="addthis_counter addthis_pill_style"></a>
-		</div>
-	   </p>
     </footer>
 
     </div> <!-- /container -->
@@ -60,13 +49,13 @@
 	<script>
 		var dummystring;
 		function findID(username){
-			$.getJSON('https://graph.facebook.com/' + username, function(data) {
+			$.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
 				
 				window.history.pushState(data, data.name + "'s ID", "?" + data.username);
 				$("#results").show();
 				$("#fbid").html(data.id);
 				$("#name").html(data.name);
-				$("#link").attr("href", data.link);		
+				$("#link").attr("href", "https://fb.com/" + data.id);		
 
 			})
 		}
@@ -90,7 +79,6 @@
 
 		});
 	</script>
-	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=batuhanicoz"></script>
 
   </body>
 </html>
