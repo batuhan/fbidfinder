@@ -50,7 +50,7 @@
 		function findID(username){
 			$.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
 				
-				window.history.pushState(data, data.name + "'s ID", "?" + data.username);
+				window.history.pushState(data, data.name + "'s ID", "?" + username);
 				$("#results").show();
 				$("#fbid").html(data.id);
 				$("#name").html(data.name);
