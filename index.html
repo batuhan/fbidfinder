@@ -64,8 +64,8 @@
 
 			$("#username").focus();
 
-			$('#username').keyup(function(){
-				findID($('#username').val(), 'keyup');
+			$('#username').keydown(function(){
+				findID($('#username').val());
 			});
 
 		});
