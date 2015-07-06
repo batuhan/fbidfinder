@@ -27,9 +27,9 @@
     <div class="container">
 
       <h1>Facebook ID Finder</h1>
-      <p>A <strong>very</strong> simple tool to easily learn your Facebook ID.</p>
+      <p>A <strong>very</strong> simple tool to easily learn Facebook ID of a page.</p>
         <div class="clearfix">
-          <label for="">Just enter the username and nothing else, please.</label>
+          <label for="">Just enter the username and nothing else, please. <strong>This won't work for users, only pages.</strong></label>
           <div class="input">
             https://www.facebook.com/ <input class="xlarge" id="username" name="username" size="30" type="text" />
           </div>
@@ -47,7 +47,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>
-		var dummystring;
 		function findID(username){
 			$.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
 				
@@ -61,15 +60,6 @@
 		}
 		
 		$(function(){
-			
-			//if(!(window.location.pathname=="/")){
-			//	findID(window.location.pathname);				
-			//}
-
-			if(!(window.location.pathname=="/")){
-				dummystring = window.location.pathname;
-				findID(dummystring.replace('?', '');				
-			}
 
 			$("#username").focus();
 
