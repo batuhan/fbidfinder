@@ -29,7 +29,8 @@
       <h1>Facebook ID Finder</h1>
       <p>A <strong>very</strong> simple tool to easily learn Facebook ID of a page.</p>
         <div class="clearfix">
-          <label for="">Just enter the username and nothing else, please. <strong>This won't work for users, only pages.</strong></label>
+          <label for="">Just enter the username and nothing else, please. <strong>This won't work for users, only pages.</strong>
+          </label>
           <div class="input">
             https://www.facebook.com/ <input class="xlarge" id="username" name="username" size="30" type="text" />
           </div>
@@ -65,7 +66,9 @@
 			$("#username").focus();
 
 			$('#username').on('keyup keydown blur', function(){
-				findID($('#username').val());
+				setTimeout(function(){
+					findID($('#username').val());
+				}, 10);
 			});
 
 		});
