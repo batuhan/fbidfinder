@@ -35,6 +35,7 @@
           </div>
         </div> <!-- /clearfix -->
 	<div id="results" style="display:none;">
+	<img src="" id="profilepic" />
 	<h3><span id="name"></span>'s Facebook ID is #<a href="" id="link"><span id="fbid"></span></a></h3>
 	</div>
 	<hr />
@@ -50,10 +51,12 @@
 		function findID(username){
 			$.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
 				$("#results").show();
-				var id = data.id;
 				$("#fbid").html(data.id);
 				$("#name").html(data.name);
-				$("#link").attr("href", "https://fb.com/" + data.id);
+				var link = "https://fb.com/" + username;
+				var link_to_picture = "https://graph.facebook.com/" + username + "/picture";
+				$("#link").attr("href", link);
+				$("#profilepic").attr("src", link_to_picture);
 			})
 		}
 		
