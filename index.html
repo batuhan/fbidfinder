@@ -49,13 +49,11 @@
 	<script>
 		function findID(username){
 			$.getJSON('https://bt.hn/a/fbidfinder?username=' + username, function(data) {
-				
-				window.history.pushState(data, data.name + "'s ID", "?" + username);
 				$("#results").show();
+				var id = data.id;
 				$("#fbid").html(data.id);
 				$("#name").html(data.name);
-				$("#link").attr("href", "https://fb.com/" + data.id);		
-
+				$("#link").attr("href", "https://fb.com/" + data.id);
 			})
 		}
 		
